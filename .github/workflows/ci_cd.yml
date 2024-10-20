@@ -21,12 +21,21 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Set PYTHONPATH
+      run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -e .[dev]
+    - name: Debug info
+      run: |
+        pwd
+        ls -R
+        echo $PYTHONPATH
+        pip list
+        python -c "import sys; print(sys.path)"
     - name: Run tests
-      run: pytest
+      run: pytest -v --import-mode=importlib
     - name: Check code style
       run: |
         flake8 src/hamiltonian_ai tests
@@ -55,3 +64,4 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
         twine upload dist/*
+      
