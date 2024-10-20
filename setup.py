@@ -14,6 +14,7 @@ setup(
     url="https://github.com/Javihaus/hamiltonian_ai",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
+    include_package_data=True,
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
@@ -34,5 +35,10 @@ setup(
     extras_require={
         "dev": ["pytest", "pytest-cov", "flake8", "black", "isort"],
         "docs": ["sphinx", "sphinx-rtd-theme"],
+    },
+    entry_points={
+        "console_scripts": [
+            "hamiltonian_ai=hamiltonian_ai.cli:main",
+        ],
     },
 )
