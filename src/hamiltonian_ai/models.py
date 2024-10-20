@@ -1,43 +1,32 @@
 import torch
-from torch.optim import Optimizer
+import torch.nn as nn
 
-class AdvancedSymplecticOptimizer(Optimizer):
-    def __init__(self, params, lr=1e-2, beta=0.9, epsilon=1e-8):
-        defaults = dict(lr=lr, beta=beta, epsilon=epsilon)
-        super(AdvancedSymplecticOptimizer, self).__init__(params, defaults)
+class HamiltonianNN(nn.Module):
+    def __init__(self, input_dim, hidden_dims=[512, 256], activation='leaky_relu', dropout_rate=0.2):
+        super().__init__()
+        self.layers = nn.ModuleList()
+        
+        # Input layer
+        self.layers.append(nn.Linear(input_dim, hidden_dims[0]))
+        
+        # Hidden layers
+        for i in range(len(hidden_dims) - 1):
+            self.layers.append(nn.Linear(hidden_dims[i], hidden_dims[i+1]))
+        
+        # Output layer
+        self.layers.append(nn.Linear(hidden_dims[-1], 2))  # Binary classification
+        
+        # Activation function
+        if activation == 'leaky_relu':
+            self.activation = nn.LeakyReLU()
+        elif activation == 'relu':
+            self.activation = nn.ReLU()
+        else:
+            raise ValueError(f"Unsupported activation function: {activation}")
+        
+        self.dropout = nn.Dropout(dropout_rate)
 
-    @torch.no_grad()
-    def step(self, closure=None):
-        loss = None
-        if closure is not None:
-            with torch.enable_grad():
-                loss = closure()
-
-        for group in self.param_groups:
-            for p in group['params']:
-                if p.grad is None:
-                    continue
-                grad = p.grad
-                state = self.state[p]
-
-                if len(state) == 0:
-                    state['step'] = 0
-                    state['momentum'] = torch.zeros_like(p.data)
-
-                momentum = state['momentum']
-                lr, beta, eps = group['lr'], group['beta'], group['epsilon']
-
-                state['step'] += 1
-
-                # Implement 4th order symplectic integrator (Forest-Ruth algorithm)
-                momentum.mul_(beta).add_(grad, alpha=1 - beta)
-
-                # Compute adaptive step size
-                kinetic = 0.5 * (momentum ** 2).sum()
-                potential = 0.5 * (grad ** 2).sum()
-                hamiltonian = kinetic + potential
-                step_size = lr / (hamiltonian.sqrt() + eps)
-
-                p.add_(momentum, alpha=-step_size)
-
-        return loss
+    def forward(self, x):
+        for layer in self.layers[:-1]:  # All layers except the last
+            x = self.dropout(self.activation(layer(x)))
+        return self.layers[-1](x)  # Last layer (no activation for output)
