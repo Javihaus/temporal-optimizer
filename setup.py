@@ -6,7 +6,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="hamiltonian_ai",
     version="0.1.0",
-    author="Javier Marin",author_email="javierl@jmarin.info",
+    author="Javier Marin",
+    author_email="javierl@jmarin.info",
     description="A Hamiltonian-inspired approach for AI optimization",
     long_description=long_description,
     long_description_content_type="text/markdown",
