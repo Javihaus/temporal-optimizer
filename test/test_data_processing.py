@@ -35,7 +35,7 @@ def test_evaluate_model_perfect_prediction(model_and_data):
     # Override model's forward method to always predict correctly
     def perfect_forward(self, x):
         batch_size = x.shape[0]
-        return torch.randint(0, 2, (batch_size, 2)).float().to(device)
+        return torch.ones((batch_size, 2)).float().to(device)
     
     model.forward = lambda x: perfect_forward(model, x)
     
