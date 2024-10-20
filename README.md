@@ -99,12 +99,28 @@ pip install -e .[dev]
 pytest
 ```
 
+## Citation
+
+If you use Hamiltonian AI in your research, please cite our paper:
+
+```BibTex
+@article{marin2024hamiltonian,
+  title={Hamiltonian Neural Networks for Robust Out-of-Time Credit Scoring},
+  author={Mar{\'\i}n, Javier},
+  journal={arXiv preprint arXiv:2410.10182},
+  year={2024}
+}
+```
+
+```BibTex
+@article{marin2024optimizing,
+  title={Optimizing AI Reasoning: A Hamiltonian Dynamics Approach to Multi-Hop Question Answering},
+  author={Marin, Javier},
+  journal={arXiv preprint arXiv:2410.04415},
+  year={2024}
+}
+```
+
 ## Contact
 For any questions or feedback, please open an issue on our GitHub repository or contact us at javier@jmarin.info
 
-@article{author2024hamiltonian,
-  title={Hamiltonian-Inspired Optimization in Neural Networks},
-  author={Marin, J.},
-  journal={arXiv preprint arXiv:2024.12345},
-  year={2024}
-}
