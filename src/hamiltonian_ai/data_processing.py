@@ -1,21 +1,37 @@
 import torch
-from sklearn.metrics import accuracy_score, precision_recall_fscore_support, roc_auc_score
+from torch.utils.data import Dataset, DataLoader
+from sklearn.preprocessing import StandardScaler
+from imblearn.over_sampling import SMOTE
 
-def evaluate_model(model, dataloader, device):
-    model.eval()
-    all_preds = []
-    all_labels = []
+class HamiltonianDataset(Dataset):
+    def __init__(self, features, labels):
+        self.features = torch.tensor(features, dtype=torch.float32)
+        self.labels = torch.tensor(labels, dtype=torch.long)
 
-    with torch.no_grad():
-        for features, labels in dataloader:
-            features, labels = features.to(device), labels.to(device)
-            outputs = model(features)
-            _, preds = torch.max(outputs, 1)
-            all_preds.extend(preds.cpu().numpy())
-            all_labels.extend(labels.cpu().numpy())
+    def __len__(self):
+        return len(self.labels)
 
-    accuracy = accuracy_score(all_labels, all_preds)
-    precision, recall, f1, _ = precision_recall_fscore_support(all_labels, all_preds, average='weighted')
-    auc = roc_auc_score(all_labels, all_preds)
+    def __getitem__(self, idx):
+        return self.features[idx], self.labels[idx]
 
-    return accuracy, precision, recall, f1, auc
+def prepare_data(X, y, test_size=0.2, apply_smote=True):
+    # Split data
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+    
+    # Scale features
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    
+    # Apply SMOTE if needed
+    if apply_smote:
+        smote = SMOTE(random_state=42)
+        X_train_resampled, y_train_resampled = smote.fit_resample(X_train_scaled, y_train)
+    else:
+        X_train_resampled, y_train_resampled = X_train_scaled, y_train
+    
+    # Create datasets
+    train_dataset = HamiltonianDataset(X_train_resampled, y_train_resampled)
+    test_dataset = HamiltonianDataset(X_test_scaled, y_test)
+    
+    return train_dataset, test_dataset, scaler
