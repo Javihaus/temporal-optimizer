@@ -38,7 +38,7 @@ def test_evaluate_model_perfect_prediction(model_and_data):
         # Assuming binary classification
         predictions = torch.zeros((batch_size, 2)).float().to(device)
         predictions[:, 1] = 1  # Set the positive class probability to 1
-        return predictionsice)
+        return predictions
     
     model.forward = lambda x: perfect_forward(model, x)
     
