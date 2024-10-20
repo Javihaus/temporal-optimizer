@@ -100,3 +100,10 @@ pytest
 
 ## Contact
 For any questions or feedback, please open an issue on our GitHub repository or contact us at javier@jmarin.info
+
+@article{author2024hamiltonian,
+  title={Hamiltonian-Inspired Optimization in Neural Networks},
+  author={Marin, J.},
+  journal={arXiv preprint arXiv:2024.12345},
+  year={2024}
+}
