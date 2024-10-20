@@ -66,8 +66,9 @@ print(f"Accuracy: {accuracy}, F1 Score: {f1}, AUC: {auc}")
 ## Examples
 For more detailed examples, please check the examples/ directory in our repository:
 
-- Credit Scoring Example
-- Question Answering Example
+- Credit Scoring (inlcuding notebook)</br>
+   Data for this example is available here: https://zenodo.org/records/8401978  (DOI 10.5281/zenodo.8401977)
+- Question Answering (inlcuding notebook and data)
 
 ## Documentation
 For full documentation, including API reference and tutorials, visit our documentation page.
