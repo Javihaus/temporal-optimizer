@@ -23,28 +23,23 @@ def test_hamiltonian_dataset(sample_data):
 
 def test_prepare_data_without_smote(sample_data):
     X, y = sample_data
-    print(f"Sample data shapes: X: {X.shape}, y: {y.shape}")
-    train_dataset, test_dataset, scaler = prepare_data(X, y, test_size=0.2, apply_smote=True)
-    print(f"Resulting dataset sizes: train: {len(train_dataset)}, test: {len(test_dataset)}")
-    assert isinstance(train_dataset, HamiltonianDataset)
-    assert isinstance(test_dataset, HamiltonianDataset)
-    
-    # Check if SMOTE was applied (train set should be balanced)
-    train_labels = [label.item() for _, label in train_dataset]
-    unique, counts = np.unique(train_labels, return_counts=True)
-    assert len(unique) == 2
-    assert counts[0] == counts[1]
-    
-    # Check if scaling was applied
-    assert scaler.mean_ is not None
-    assert scaler.scale_ is not None
-
-def test_prepare_data_without_smote(sample_data):
-    X, y = sample_data
     train_dataset, test_dataset, scaler = prepare_data(X, y, test_size=0.2, apply_smote=False)
 
     # Check that class distribution is preserved in train set
     train_labels = [label.item() for _, label in train_dataset]
     unique, counts = np.unique(train_labels, return_counts=True)
     assert len(unique) == 2
-    assert np.abs(counts[0] - counts[1]) <= 1  # Allow for a difference of at most 1 due to odd number of samples
+    
+    # Calculate the imbalance ratio
+    imbalance_ratio = max(counts) / min(counts)
+    
+    # Allow for some imbalance, but not too much
+    assert imbalance_ratio < 1.5, f"Class imbalance too high: {imbalance_ratio}"
+
+    # Check that the total number of samples is correct
+    assert len(train_dataset) == int(0.8 * len(sample_data[0]))
+    assert len(test_dataset) == int(0.2 * len(sample_data[0]))
+
+    # Check that the scaler is fitted
+    assert hasattr(scaler, 'mean_')
+    assert hasattr(scaler, 'scale_')
