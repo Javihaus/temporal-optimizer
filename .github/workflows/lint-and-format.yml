@@ -41,7 +41,7 @@ jobs:
       run: black .
     
     - name: Run flake8
-      run: flake8 .
+      run: flake8 --config=.flake8 .
     
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v4
