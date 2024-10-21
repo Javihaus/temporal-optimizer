@@ -14,7 +14,6 @@ def test_hamiltonian_loss(model_and_data):
     model, x, y = model_and_data
     outputs = model(x)
     loss = hamiltonian_loss(outputs, y, model)
-    
     assert isinstance(loss, torch.Tensor)
     assert loss.ndim == 0  # scalar
     assert loss.requires_grad
@@ -22,18 +21,14 @@ def test_hamiltonian_loss(model_and_data):
 def test_hamiltonian_loss_regularization(model_and_data):
     model, x, y = model_and_data
     outputs = model(x)
-    
     loss_with_reg = hamiltonian_loss(outputs, y, model, reg_coeff=0.1)
-    loss_without_reg = hamiltonian_loss(outputs, y, model, reg_coeff=0.0)
-    
+    loss_without_reg = hamiltonian_loss(outputs, y, model, reg_coeff=0.0) 
     assert loss_with_reg > loss_without_reg
 
 def test_hamiltonian_loss_backprop(model_and_data):
     model, x, y = model_and_data
     outputs = model(x)
-    loss = hamiltonian_loss(outputs, y, model)
-    
+    loss = hamiltonian_loss(outputs, y, model)    
     loss.backward()
-    
     for param in model.parameters():
         assert param.grad is not None
