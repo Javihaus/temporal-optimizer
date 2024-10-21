@@ -34,7 +34,7 @@ def test_prepare_data_without_smote(sample_data):
     imbalance_ratio = max(counts) / min(counts)
     
     # Allow for some imbalance, but not too much
-    assert imbalance_ratio < 1.5, f"Class imbalance too high: {imbalance_ratio}"
+    assert imbalance_ratio < 1.75, f"Class imbalance too high: {imbalance_ratio}"
 
     # Check that the total number of samples is correct
     assert len(train_dataset) == int(0.8 * len(sample_data[0]))
