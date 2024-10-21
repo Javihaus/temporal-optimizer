@@ -23,7 +23,9 @@ def test_evaluate_model_perfect_prediction(model_and_data):
     # Override model's forward method to always predict correctly
     def perfect_forward(self, x):
         # Get the actual labels for this batch
-        for batch_x, batch_y in dataloader:
+        nonlocal dataloader
+        dataloader_iter = iter(dataloader)
+        for batch_x, batch_y in dataloader_iter:
             if torch.equal(x, batch_x.to(device)):
                 labels = batch_y.to(device)
                 break
