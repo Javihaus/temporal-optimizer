@@ -20,9 +20,17 @@ def test_evaluate_model_perfect_prediction(model_and_data):
     model.to(device)
 
     # Override model's forward method to always predict correctly
+    def test_evaluate_model_perfect_prediction(model_and_data):
+    model, dataloader = model_and_data
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+
+    # Override model's forward method to always predict correctly
     def perfect_forward(self, x):
         batch_size = x.shape[0]
-        labels = next(iter(dataloader))[1]  # Get the labels from the dataloader
+        # Get the actual labels for this batch
+        _, labels = next(iter(dataloader))
+        labels = labels[:batch_size]  # In case the last batch is smaller
         predictions = torch.zeros((batch_size, 2)).float().to(device)
         predictions[torch.arange(batch_size), labels] = 1
         return predictions
