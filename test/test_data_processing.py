@@ -5,6 +5,7 @@ from hamiltonian_ai.utils import evaluate_model
 from hamiltonian_ai.models import HamiltonianNN
 from torch.utils.data import TensorDataset, DataLoader
 
+
 @pytest.fixture
 def model_and_data():
     torch.manual_seed(42)  # Set a fixed seed for reproducibility
