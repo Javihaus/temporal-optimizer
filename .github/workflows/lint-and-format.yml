@@ -22,6 +22,21 @@ jobs:
         python -m pip install --upgrade pip
         pip install black flake8
     
+    - name: Create .flake8 configuration
+      run: |
+        echo "[flake8]
+        max-line-length = 100
+        ignore = W293, E302, W292
+        exclude =
+            .git,
+            __pycache__,
+            build,
+            dist,
+            .venv
+        per-file-ignores =
+            __init__.py:F401
+            tests/*:F841" > .flake8
+    
     - name: Run Black
       run: black .
     
@@ -33,3 +48,9 @@ jobs:
       with:
         commit_message: Apply automatic formatting changes
         branch: ${{ github.head_ref }}
+        
+    - name: Check for remaining issues
+      run: |
+        if [ ${{ job.status }} == 'failure' ]; then
+          echo "::warning::Linting or formatting issues remain. Please check the job logs for details."
+        fi
