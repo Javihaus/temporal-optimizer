@@ -3,6 +3,7 @@ import torch
 from hamiltonian_ai.optimizers import AdvancedSymplecticOptimizer
 
 
+
 class SimpleModel(torch.nn.Module):
     def __init__(self):
         super().__init__()
@@ -10,6 +11,7 @@ class SimpleModel(torch.nn.Module):
 
     def forward(self, x):
         return self.linear(x)
+
 
 
 @pytest.fixture
@@ -21,11 +23,9 @@ def model_and_optimizer():
 
 def test_optimizer_step(model_and_optimizer):
     model, optimizer = model_and_optimizer
-
     # Generate dummy data
     x = torch.randn(5, 10)
     y = torch.randn(5, 1)
-
     # Perform one optimization step
     def closure():
         optimizer.zero_grad()
@@ -33,14 +33,11 @@ def test_optimizer_step(model_and_optimizer):
         loss = torch.nn.functional.mse_loss(output, y)
         loss.backward()
         return loss
-
     initial_params = [p.clone() for p in model.parameters()]
     loss = optimizer.step(closure)
-
     # Check that parameters have been updated
     for p, initial_p in zip(model.parameters(), initial_params):
         assert not torch.allclose(p, initial_p)
-
     # Ensure the loss is a scalar and requires grad
     assert loss.dim() == 0
     assert loss.requires_grad
