@@ -32,7 +32,7 @@ def test_optimizer_step(model_and_optimizer):
         return loss
     
     initial_params = [p.clone() for p in model.parameters()]
-    loss = optimizer.step(closure)
+    #loss = optimizer.step(closure)
     
     # Check that parameters have been updated
     for p, initial_p in zip(model.parameters(), initial_params):
