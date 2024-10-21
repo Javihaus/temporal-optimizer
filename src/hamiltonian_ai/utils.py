@@ -7,12 +7,12 @@ def evaluate_model(model, dataloader, device):
     all_labels = []
 
     with torch.no_grad():
-        for features, labels in dataloader:
-            features, labels = features.to(device), labels.to(device)
-            outputs = model(features)
+        for x, y in dataloader:
+            x, y = x.to(device), y.to(device)
+            outputs = model(x)
             _, preds = torch.max(outputs, 1)
             all_preds.extend(preds.cpu().numpy())
-            all_labels.extend(labels.cpu().numpy())
+            all_labels.extend(y.cpu().numpy())
 
     accuracy = accuracy_score(all_labels, all_preds)
     precision, recall, f1, _ = precision_recall_fscore_support(all_labels, all_preds, average='weighted', zero_division=1)
