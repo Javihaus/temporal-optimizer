@@ -1,5 +1,6 @@
 import torch.nn as nn
 
+
 def hamiltonian_loss(outputs, labels, model, reg_coeff=0.01):
     loss_fct = nn.CrossEntropyLoss()
     base_loss = loss_fct(outputs, labels)
