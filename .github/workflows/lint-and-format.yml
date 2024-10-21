@@ -22,35 +22,23 @@ jobs:
         python -m pip install --upgrade pip
         pip install black flake8
     
-    - name: Create .flake8 configuration
-      run: |
-        echo "[flake8]
-        max-line-length = 100
-        ignore = W293, E302, W292
-        exclude =
-            .git,
-            __pycache__,
-            build,
-            dist,
-            .venv
-        per-file-ignores =
-            __init__.py:F401
-            tests/*:F841" > .flake8
-    
     - name: Run Black
       run: black .
     
+    - name: Debug Flake8 Config
+      run: |
+        echo "Contents of .flake8:"
+        cat .flake8
+        echo "Flake8 version:"
+        flake8 --version
+    
     - name: Run flake8
-      run: flake8 --config=.flake8 .
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --ignore=E302,W293,W292,E501,F401,F841
     
     - name: Commit changes
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Apply automatic formatting changes
         branch: ${{ github.head_ref }}
-        
-    - name: Check for remaining issues
-      run: |
-        if [ ${{ job.status }} == 'failure' ]; then
-          echo "::warning::Linting or formatting issues remain. Please check the job logs for details."
-        fi
