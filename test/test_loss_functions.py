@@ -21,10 +21,11 @@ def test_hamiltonian_dataset(sample_data):
     assert features.shape == (10,)
     assert label.shape == ()
 
-def test_prepare_data(sample_data):
+def test_prepare_data_without_smote(sample_data):
     X, y = sample_data
+    print(f"Sample data shapes: X: {X.shape}, y: {y.shape}")
     train_dataset, test_dataset, scaler = prepare_data(X, y, test_size=0.2, apply_smote=True)
-    
+    print(f"Resulting dataset sizes: train: {len(train_dataset)}, test: {len(test_dataset)}")
     assert isinstance(train_dataset, HamiltonianDataset)
     assert isinstance(test_dataset, HamiltonianDataset)
     
