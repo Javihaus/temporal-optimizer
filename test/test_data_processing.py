@@ -20,17 +20,19 @@ def test_evaluate_model_perfect_prediction(model_and_data):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
 
+    # Create a dictionary to store the correct labels for each input
+    correct_labels = {}
+    for x, y in dataloader:
+        for i in range(x.shape[0]):
+            correct_labels[tuple(x[i].tolist())] = y[i].item()
+
     # Override model's forward method to always predict correctly
     def perfect_forward(self, x):
-        nonlocal dataloader
-        for batch_x, batch_y in dataloader:
-            if torch.equal(x, batch_x.to(device)):
-                labels = batch_y.to(device)
-                break
-        
         batch_size = x.shape[0]
         predictions = torch.zeros((batch_size, 2)).float().to(device)
-        predictions[torch.arange(batch_size), labels] = 1
+        for i in range(batch_size):
+            label = correct_labels[tuple(x[i].tolist())]
+            predictions[i, label] = 1
         return predictions
 
     # Replace the model's forward method
