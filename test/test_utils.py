@@ -11,7 +11,7 @@ def model_and_data():
     X = torch.randn(100, 10)
     y = torch.randint(0, 2, (100,))
     dataset = TensorDataset(X, y)
-    dataloader = DataLoader(dataset, batch_size=32)
+    dataloader = DataLoader(dataset, batch_size=32, shuffle=False)  # Set shuffle to False
     return model, dataloader
 
 def test_evaluate_model_perfect_prediction(model_and_data):
