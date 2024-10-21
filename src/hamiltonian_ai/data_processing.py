@@ -16,6 +16,8 @@ class HamiltonianDataset(Dataset):
         return self.features[idx], self.labels[idx]
 
 def prepare_data(X, y, test_size=0.2, apply_smote=True):
+    print(f"Input shapes: X: {X.shape}, y: {y.shape}")
+    print(f"apply_smote: {apply_smote}")
     # Split data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
     
@@ -35,4 +37,5 @@ def prepare_data(X, y, test_size=0.2, apply_smote=True):
     train_dataset = HamiltonianDataset(X_train_resampled, y_train_resampled)
     test_dataset = HamiltonianDataset(X_test_scaled, y_test)
     
+    print(f"Output shapes: train_dataset: {len(train_dataset)}, test_dataset: {len(test_dataset)}")
     return train_dataset, test_dataset, scaler
