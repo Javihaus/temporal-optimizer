@@ -11,6 +11,7 @@ def model_and_data():
     model = HamiltonianNN(input_dim=10, hidden_dims=[64, 32])
     X = torch.randn(100, 10)
     y = torch.randint(0, 2, (100,))
+    print("Label distribution:", torch.bincount(y))
     dataset = TensorDataset(X, y)
     dataloader = DataLoader(dataset, batch_size=32, shuffle=False)  # Set shuffle to False
     return model, dataloader
