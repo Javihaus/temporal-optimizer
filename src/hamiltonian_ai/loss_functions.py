@@ -1,4 +1,3 @@
-import torch
 import torch.nn as nn
 
 def hamiltonian_loss(outputs, labels, model, reg_coeff=0.01):
