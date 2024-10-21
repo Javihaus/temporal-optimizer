@@ -2,6 +2,7 @@ import pytest
 import torch
 from hamiltonian_ai.optimizers import AdvancedSymplecticOptimizer
 
+
 class SimpleModel(torch.nn.Module):
     def __init__(self):
         super().__init__()
@@ -10,11 +11,13 @@ class SimpleModel(torch.nn.Module):
     def forward(self, x):
         return self.linear(x)
 
+
 @pytest.fixture
 def model_and_optimizer():
     model = SimpleModel()
     optimizer = AdvancedSymplecticOptimizer(model.parameters())
     return model, optimizer
+
 
 def test_optimizer_step(model_and_optimizer):
     model, optimizer = model_and_optimizer
