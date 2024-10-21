@@ -49,11 +49,11 @@ jobs:
         echo "Directory contents:"
         ls -R
         echo "Running flake8..."
-        flake8 src/hamiltonian_ai test
+        flake8 src/hamiltonian_ai tests
         echo "Running black..."
-        black --check src/hamiltonian_ai test
+        black --check src/hamiltonian_ai tests
         echo "Running isort..."
-        isort --check-only src/hamiltonian_ai test
+        isort --check-only src/hamiltonian_ai tests
 
   publish:
     needs: test
