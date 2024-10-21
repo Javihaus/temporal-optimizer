@@ -1,34 +1,80 @@
 import pytest
 import torch
-from hamiltonian_ai.loss_functions import hamiltonian_loss
-from hamiltonian_ai.models import HamiltonianNN
+from hamiltonian_ai.optimizers import AdvancedSymplecticOptimizer
+
+
+class SimpleModel(torch.nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.linear = torch.nn.Linear(10, 1)
+
+    def forward(self, x):
+        return self.linear(x)
+
 
 @pytest.fixture
-def model_and_data():
-    model = HamiltonianNN(input_dim=10, hidden_dims=[64, 32])
-    x = torch.randn(5, 10)
-    y = torch.randint(0, 2, (5,))
-    return model, x, y
+def model_and_optimizer():
+    model = SimpleModel()
+    optimizer = AdvancedSymplecticOptimizer(model.parameters())
+    return model, optimizer
 
-def test_hamiltonian_loss(model_and_data):
-    model, x, y = model_and_data
-    outputs = model(x)
-    loss = hamiltonian_loss(outputs, y, model)
-    assert isinstance(loss, torch.Tensor)
-    assert loss.ndim == 0  # scalar
+
+def test_optimizer_step(model_and_optimizer):
+    model, optimizer = model_and_optimizer
+
+    # Generate dummy data
+    x = torch.randn(5, 10)
+    y = torch.randn(5, 1)
+
+    # Perform one optimization step
+    def closure():
+        optimizer.zero_grad()
+        output = model(x)
+        loss = torch.nn.functional.mse_loss(output, y)
+        loss.backward()
+        return loss
+
+    initial_params = [p.clone() for p in model.parameters()]
+    loss = optimizer.step(closure)
+
+    # Check that parameters have been updated
+    for p, initial_p in zip(model.parameters(), initial_params):
+        assert not torch.allclose(p, initial_p)
+
+    # Ensure the loss is a scalar and requires grad
+    assert loss.dim() == 0
     assert loss.requires_grad
 
-def test_hamiltonian_loss_regularization(model_and_data):
-    model, x, y = model_and_data
-    outputs = model(x)
-    loss_with_reg = hamiltonian_loss(outputs, y, model, reg_coeff=0.1)
-    loss_without_reg = hamiltonian_loss(outputs, y, model, reg_coeff=0.0) 
-    assert loss_with_reg > loss_without_reg
 
-def test_hamiltonian_loss_backprop(model_and_data):
-    model, x, y = model_and_data
-    outputs = model(x)
-    loss = hamiltonian_loss(outputs, y, model)    
-    loss.backward()
-    for param in model.parameters():
-        assert param.grad is not None
+def test_optimizer_state(model_and_optimizer):
+    model, optimizer = model_and_optimizer
+
+    # Check initial state
+    for group in optimizer.param_groups:
+        for p in group['params']:
+            assert 'momentum' not in optimizer.state[p]
+
+    # Perform one step to initialize state
+    x = torch.randn(5, 10)
+    y = torch.randn(5, 1)
+
+    def closure():
+        optimizer.zero_grad()
+        output = model(x)
+        loss = torch.nn.functional.mse_loss(output, y)
+        loss.backward()
+        return loss
+
+    optimizer.step(closure)
+
+    # Check that state has been initialized
+    for group in optimizer.param_groups:
+        for p in group['params']:
+            assert 'momentum' in optimizer.state[p]
+            assert 'step' in optimizer.state[p]
+
+    # Check that momentum is a tensor and step is an integer
+    for group in optimizer.param_groups:
+        for p in group['params']:
+            assert isinstance(optimizer.state[p]['momentum'], torch.Tensor)
+            assert isinstance(optimizer.state[p]['step'], int)
