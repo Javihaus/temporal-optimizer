@@ -29,7 +29,7 @@ def test_prepare_data_without_smote(sample_data):
     train_labels = [label.item() for _, label in train_dataset]
     unique, counts = np.unique(train_labels, return_counts=True)
     assert len(unique) == 2
-    
+
     # Calculate the imbalance ratio
     imbalance_ratio = max(counts) / min(counts)
     
@@ -43,3 +43,8 @@ def test_prepare_data_without_smote(sample_data):
     # Check that the scaler is fitted
     assert hasattr(scaler, 'mean_')
     assert hasattr(scaler, 'scale_')
+
+    print(f"Train dataset size: {len(train_dataset)}")
+    print(f"Test dataset size: {len(test_dataset)}")
+    print(f"Class distribution in train set: {dict(zip(unique, counts))}")
+    print(f"Imbalance ratio: {imbalance_ratio}")
