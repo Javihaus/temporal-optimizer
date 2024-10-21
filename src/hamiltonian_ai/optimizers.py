@@ -1,6 +1,7 @@
 import torch
 from torch.optim import Optimizer
 
+
 class AdvancedSymplecticOptimizer(Optimizer):
     def __init__(self, params, lr=1e-2, beta=0.9, epsilon=1e-8):
         defaults = dict(lr=lr, beta=beta, epsilon=epsilon)
