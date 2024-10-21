@@ -24,7 +24,7 @@ def test_evaluate_model_perfect_prediction(model_and_data):
     def perfect_forward(self, x):
         # Get the actual labels for this batch
         for batch_x, batch_y in dataloader:
-            if torch.equal(x, batch_x):
+            if torch.equal(x, batch_x.to(device)):
                 labels = batch_y.to(device)
                 break
         
@@ -33,7 +33,8 @@ def test_evaluate_model_perfect_prediction(model_and_data):
         predictions[torch.arange(batch_size), labels] = 1
         return predictions
 
-    model.forward = perfect_forward
+    # Replace the model's forward method
+    model.forward = lambda x: perfect_forward(model, x)
 
     accuracy, precision, recall, f1, auc = evaluate_model(model, dataloader, device)
 
