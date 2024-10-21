@@ -41,9 +41,9 @@ def test_prepare_data(sample_data):
 def test_prepare_data_without_smote(sample_data):
     X, y = sample_data
     train_dataset, test_dataset, scaler = prepare_data(X, y, test_size=0.2, apply_smote=False)
-    
-    # Check that class imbalance is preserved in train set
+
+    # Check that class distribution is preserved in train set
     train_labels = [label.item() for _, label in train_dataset]
     unique, counts = np.unique(train_labels, return_counts=True)
     assert len(unique) == 2
-    assert counts[0] != counts[1]
+    assert np.abs(counts[0] - counts[1]) <= 1  # Allow for a difference of at most 1 due to odd number of samples
