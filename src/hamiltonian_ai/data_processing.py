@@ -18,8 +18,12 @@ class HamiltonianDataset(Dataset):
 def prepare_data(X, y, test_size=0.2, apply_smote=True):
     print(f"Input shapes: X: {X.shape}, y: {y.shape}")
     print(f"apply_smote: {apply_smote}")
+    
     # Split data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+    
+    print(f"Train shapes after split: X: {X_train.shape}, y: {y_train.shape}")
+    print(f"Test shapes after split: X: {X_test.shape}, y: {y_test.shape}")
     
     # Scale features
     scaler = StandardScaler()
@@ -30,6 +34,7 @@ def prepare_data(X, y, test_size=0.2, apply_smote=True):
     if apply_smote:
         smote = SMOTE(random_state=42)
         X_train_resampled, y_train_resampled = smote.fit_resample(X_train_scaled, y_train)
+        print(f"Train shapes after SMOTE: X: {X_train_resampled.shape}, y: {y_train_resampled.shape}")
     else:
         X_train_resampled, y_train_resampled = X_train_scaled, y_train
     
