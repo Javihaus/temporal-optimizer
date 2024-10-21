@@ -30,7 +30,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Javihaus/hamiltonian_ai",
     package_dir={"": "src"},
-    packages=find_packages(where="src"),
+    packages=find_packages(where="src", exclude=["tests"]),
     include_package_data=True,
     classifiers=[
         "Development Status :: 3 - Alpha",
