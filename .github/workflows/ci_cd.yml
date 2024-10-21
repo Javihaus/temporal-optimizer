@@ -81,3 +81,11 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
         twine upload dist/*
+    - name: Check directory structure
+      run: |
+        echo "Current directory structure:"
+        tree -L 3
+        echo "Content of src directory:"
+        ls -R src
+        echo "Content of tests directory:"
+        ls -R tests
