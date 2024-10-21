@@ -7,6 +7,7 @@ from torch.utils.data import TensorDataset, DataLoader
 
 @pytest.fixture
 def model_and_data():
+    torch.manual_seed(42)  # Set a fixed seed for reproducibility
     model = HamiltonianNN(input_dim=10, hidden_dims=[64, 32])
     X = torch.randn(100, 10)
     y = torch.randint(0, 2, (100,))
