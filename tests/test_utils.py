@@ -1,6 +1,5 @@
 import pytest
 import torch
-import numpy as np
 from hamiltonian_ai.utils import evaluate_model
 from hamiltonian_ai.models import HamiltonianNN
 from torch.utils.data import TensorDataset, DataLoader
