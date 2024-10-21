@@ -35,9 +35,10 @@ def test_evaluate_model_perfect_prediction(model_and_data):
     # Override model's forward method to always predict correctly
     def perfect_forward(self, x):
         batch_size = x.shape[0]
-        # Assuming binary classification
+        # Create perfect predictions based on the actual labels
+        labels = next(iter(dataloader))[1]  # Get the labels from the dataloader
         predictions = torch.zeros((batch_size, 2)).float().to(device)
-        predictions[:, 1] = 1  # Set the positive class probability to 1
+        predictions[torch.arange(batch_size), labels] = 1
         return predictions
     
     model.forward = lambda x: perfect_forward(model, x)
