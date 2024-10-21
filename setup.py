@@ -45,8 +45,8 @@ setup(
     python_requires=">=3.7",
     install_requires=install_requires,
     extras_require={
-        "dev": ["pytest", "pytest-cov", "flake8", "black", "isort"],
-        "docs": ["sphinx", "sphinx-rtd-theme"],
+    "dev": ["pytest", "pytest-cov", "flake8", "black", "isort"],
+    "docs": ["sphinx", "sphinx-rtd-theme"],
     },
     entry_points={
         "console_scripts": [
