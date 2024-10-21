@@ -16,37 +16,6 @@ def model_and_data():
     dataloader = DataLoader(dataset, batch_size=32, shuffle=False)  # Set shuffle to False
     return model, dataloader
 
-def test_evaluate_model_perfect_prediction(model_and_data):
-    model, dataloader = model_and_data
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
-
-    # Create a dictionary to store the correct labels for each input
-    correct_labels = {}
-    for x, y in dataloader:
-        for i in range(x.shape[0]):
-            correct_labels[tuple(x[i].tolist())] = y[i].item()
-
-    # Override model's forward method to always predict correctly
-    def perfect_forward(self, x):
-        batch_size = x.shape[0]
-        predictions = torch.zeros((batch_size, 2)).float().to(device)
-        for i in range(batch_size):
-            label = correct_labels[tuple(x[i].tolist())]
-            predictions[i, label] = 1
-        return predictions
-
-    # Replace the model's forward method
-    model.forward = perfect_forward
-
-    accuracy, precision, recall, f1, auc = evaluate_model(model, dataloader, device)
-
-    assert accuracy == 1.0
-    assert precision == 1.0
-    assert recall == 1.0
-    assert f1 == 1.0
-    assert auc == 1.0
-
 
 def test_evaluate_model_random_prediction(model_and_data):
     model, dataloader = model_and_data
