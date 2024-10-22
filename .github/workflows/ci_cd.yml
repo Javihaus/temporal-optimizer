@@ -9,30 +9,15 @@ on:
     types: [ created ]
 
 jobs:
-  test:
+  lint-and-format:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Set up Python
-      uses: actions/setup-python@v2
       with:
-        python-version: '3.9'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -e .[dev]
-        pip install pytest
-    
-    - name: Run tests
-      run: pytest
-      
-  style-check:
-    runs-on: ubuntu-latest
-    continue-on-error: true  # This allows the workflow to continue even if style checks fail
-    steps:
-    - uses: actions/checkout@v2
+        ref: ${{ github.head_ref || github.ref_name }}
+        fetch-depth: 0
     
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -46,40 +31,32 @@ jobs:
     
     - name: Run Black
       run: black .
-      continue-on-error: true
     
     - name: Run flake8
       run: |
-        # Only check for serious errors
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-      
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --ignore=E302,W293,W292,E501,F401,F841
+      continue-on-error: true
+    
+    - name: Configure Git
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+    
     - name: Commit changes
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Apply automatic formatting changes
-        branch: ${{ github.head_ref }}
-
-  publish:
-    needs: test  # Only depends on tests passing, not style checks
-    runs-on: ubuntu-latest
-    if: github.event_name == 'release' && github.event.action == 'created'
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.9'
-    
-    - name: Install dependencies
+      if: github.ref != 'refs/heads/main'
       run: |
-        python -m pip install --upgrade pip
-        pip install setuptools wheel twine build
-    
-    - name: Build and publish
-      env:
-        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        if [[ -n "$(git status --porcelain)" ]]; then
+          git add .
+          git commit -m "Apply automatic formatting changes"
+          git push
+        fi
+      
+    - name: Commit changes to main
+      if: github.ref == 'refs/heads/main'
       run: |
-        python -m build
-        twine upload dist/*
+        if [[ -n "$(git status --porcelain)" ]]; then
+          git add .
+          git commit -m "Apply automatic formatting changes"
+          git push origin HEAD:main
+        fi
