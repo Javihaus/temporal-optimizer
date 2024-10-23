@@ -1,5 +1,4 @@
 name: CI/CD
-
 on:
   push:
     branches: [ main ]
@@ -7,7 +6,6 @@ on:
     branches: [ main ]
   release:
     types: [ created ]
-
 jobs:
   lint-and-format:
     runs-on: ubuntu-latest
@@ -60,3 +58,29 @@ jobs:
           git commit -m "Apply automatic formatting changes"
           git push origin HEAD:main
         fi
+
+  publish:
+    needs: [lint-and-format]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'created'
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools wheel twine build
+    
+    - name: Build and publish
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        TWINE_REPOSITORY: pypi
+      run: |
+        python -m build
+        python -m twine upload --verbose dist/*
