@@ -22,7 +22,7 @@ else:
 
 setup(
     name="hamiltonian_ai",
-    version="0.2.0",
+    version="0.2.1",
     author="Javier Marin",
     author_email="javierl@jmarin.info",
     description="A Hamiltonian-inspired approach for AI optimization",
