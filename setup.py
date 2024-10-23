@@ -47,5 +47,5 @@ setup(
     extras_require={
         "dev": ["pytest", "pytest-cov", "flake8", "black", "isort"],
         "docs": ["sphinx", "sphinx-rtd-theme"],
-    }
+    },
 )
