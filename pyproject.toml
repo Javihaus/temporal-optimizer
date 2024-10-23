@@ -29,9 +29,11 @@ dependencies = [
     "imbalanced-learn>=0.8.0",
 ]
 
-[tool.setuptools.packages.find]
-where = ["src"]
-include = ["hamiltonian_ai*"]
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages]
+find = {}
 
 [tool.black]
 line-length = 88
