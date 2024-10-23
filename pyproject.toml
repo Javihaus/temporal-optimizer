@@ -1,40 +1,14 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
-
-[project]
-name = "hamiltonian_ai"
-version = "0.2.1"
-authors = [
-    {name = "Javier Marin", email = "javierl@jmarin.info"},
-]
-description = "A Hamiltonian-inspired approach for AI optimization"
-readme = "README.md"
-requires-python = ">=3.7"
-license = {file = "LICENSE.txt"}
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-]
-dependencies = [
-    "torch>=1.7.0",
-    "numpy>=1.19.0",
-    "scikit-learn>=0.24.0",
-    "imbalanced-learn>=0.8.0",
-]
-
-[tool.setuptools]
-packages = ["hamiltonian_ai"]
 
 [tool.black]
 line-length = 88
 target-version = ['py37']
+
+[tool.isort]
+profile = "black"
+line-length = 88
 
 [tool.isort]
 profile = "black"
