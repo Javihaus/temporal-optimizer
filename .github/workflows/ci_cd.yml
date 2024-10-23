@@ -72,11 +72,18 @@ jobs:
   publish:
     needs: [lint-and-format]
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' && github.event.action == 'created'
+    # Modify this condition to check for release event
+    if: startsWith(github.ref, 'refs/tags/v')
     permissions:
       id-token: write
       contents: read
     steps:
+    - name: Debug event info
+      run: |
+        echo "Event name: ${{ github.event_name }}"
+        echo "Ref: ${{ github.ref }}"
+        echo "Is release? ${{ github.event_name == 'release' }}"
+    
     - uses: actions/checkout@v2
     
     - name: Set up Python
@@ -84,14 +91,19 @@ jobs:
       with:
         python-version: '3.8'
     
-    - name: Clean environment
+    - name: Install dependencies
       run: |
-        rm -rf dist/
-        rm -rf build/
-        rm -rf *.egg-info/
-        find . -type d -name "*.egg-info" -exec rm -rf {} +
-        find . -type d -name "__pycache__" -exec rm -rf {} +
-        find . -type f -name "*.pyc" -delete
+        python -m pip install --upgrade pip
+        pip install build twine
+    
+    - name: Build package
+      run: python -m build
+    
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@v1.8.11
+      with:
+        password: ${{ secrets.PYPI_PASSWORD }}
+        verbose: true
     
     - name: Install dependencies
       run: |
