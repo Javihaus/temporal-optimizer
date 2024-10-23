@@ -33,10 +33,7 @@ setup(
     packages=find_packages(where="src", exclude=["tests"]),
     include_package_data=True,  # Only include this once
     package_data={
-        "hamiltonian_ai": [
-            "docs/images/*.png",
-            "docs/presentations/*.pdf"
-        ],
+        "hamiltonian_ai": ["docs/images/*.png", "docs/presentations/*.pdf"],
     },
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -53,5 +50,5 @@ setup(
     extras_require={
         "dev": ["pytest", "pytest-cov", "flake8", "black", "isort"],
         "docs": ["sphinx", "sphinx-rtd-theme"],
-    }
+    },
 )
