@@ -25,6 +25,8 @@ $$\frac{\alpha}{2}|x - y|^2 \leq f(y) - f(x) - \langle\nabla f(x), y - x\rangle 
 ### Basic Principles
 Hamiltonians in physics describe systems that conserve total energy, leading to stable trajectories. We adapt this principle for optimization:
 
+![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Presentation Hamiltonian.png)
+
 State Space Variables:
 
 Position ($q$): Represents model parameters
@@ -58,6 +60,10 @@ Symplectic geometry provides the mathematical framework for understanding Hamilt
 
 $$\omega = \sum_i dq_i \wedge dp_i$$
 
+![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Presentation Hamiltonian7-07.png)
+
+A frictionless pendulum is one of the most basic forms of a symplectic space. Velocity and angle are the two components that describe the movements of a pendulum. We can map this in a 2D space as a trajectory.
+
 The Symplectic Euler method, which we implement, takes the form:
 
 $$\begin{align*}
@@ -69,6 +75,8 @@ where $\Delta t$ is analogous to the learning rate in optimization.
 
 ## Hamiltonian Optimization Algorithm
 Our implementation translates these physical principles into optimization:
+
+![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Presentation Hamiltonian5-05.png)
 
 **Momentum Update:**
 
