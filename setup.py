@@ -31,5 +31,5 @@ setup(
         "scikit-learn>=0.24.0",
         "imbalanced-learn>=0.8.0",
     ],
-    include_package_data=True
+    include_package_data=True,
 )
