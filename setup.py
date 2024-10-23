@@ -53,4 +53,8 @@ setup(
             "hamiltonian_ai=hamiltonian_ai.cli:main",  # Updated to match package name
         ],
     },
+    package_data={
+        "hamiltonian_ai": ["docs/images/*.png"],
+    },
+    include_package_data=True,
 )
