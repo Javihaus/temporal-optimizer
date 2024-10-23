@@ -21,7 +21,7 @@ else:
     ]
 
 setup(
-    name="hamiltonian_ai", 
+    name="hamiltonian_ai",
     version="0.2.0",
     author="Javier Marin",
     author_email="javierl@jmarin.info",
