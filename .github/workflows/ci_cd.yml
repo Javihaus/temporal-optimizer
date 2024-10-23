@@ -63,6 +63,9 @@ jobs:
     needs: [lint-and-format]
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'created'
+    permissions:
+      id-token: write
+      contents: read
     steps:
     - uses: actions/checkout@v2
     
@@ -74,13 +77,18 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel twine build
+        pip install build twine
     
-    - name: Build and publish
-      env:
-        TWINE_USERNAME: __token__
-        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-        TWINE_REPOSITORY: pypi
+    - name: Build package
+      run: python -m build
+    
+    - name: List built packages
       run: |
-        python -m build
-        python -m twine upload --verbose dist/*
+        echo "Built packages:"
+        ls -l dist/
+    
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@v1.8.11
+      with:
+        password: ${{ secrets.PYPI_PASSWORD }}
+        verbose: true
