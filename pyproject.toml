@@ -1,6 +1,36 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "hamiltonian_ai"
+version = "0.2.1"
+description = "A Hamiltonian-inspired approach for AI optimization"
+authors = [{name = "Javier Marin", email = "javierl@jmarin.info"}]
+readme = "README.md"
+requires-python = ">=3.7"
+license = {file = "LICENSE.txt"}
+dependencies = [
+    "torch>=1.7.0",
+    "numpy>=1.19.0",
+    "scikit-learn>=0.24.0",
+    "imbalanced-learn>=0.8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "flake8",
+    "isort"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["hamiltonian_ai*"]
 
 [tool.black]
 line-length = 88
