@@ -21,8 +21,8 @@ else:
     ]
 
 setup(
-    name="hamiltonian_ai",
-    version="0.1.0",
+    name="hamiltonian_ai", 
+    version="0.2.0",
     author="Javier Marin",
     author_email="javierl@jmarin.info",
     description="A Hamiltonian-inspired approach for AI optimization",
@@ -50,7 +50,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "hamiltonian_ai=hamiltonian_ai.cli:main",
+            "hamiltonian_ai=hamiltonian_ai.cli:main",  # Updated to match package name
         ],
     },
 )
