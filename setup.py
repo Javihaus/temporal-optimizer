@@ -31,10 +31,7 @@ setup(
     url="https://github.com/Javihaus/hamiltonian_ai",
     package_dir={"": "src"},
     packages=find_packages(where="src", exclude=["tests"]),
-    include_package_data=True,  # Only include this once
-    package_data={
-        "hamiltonian_ai": ["docs/images/*.png", "docs/presentations/*.pdf"],
-    },
+    include_package_data=True,
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
@@ -50,5 +47,5 @@ setup(
     extras_require={
         "dev": ["pytest", "pytest-cov", "flake8", "black", "isort"],
         "docs": ["sphinx", "sphinx-rtd-theme"],
-    },
+    }
 )
