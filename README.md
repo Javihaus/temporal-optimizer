@@ -23,25 +23,32 @@ $$\frac{\alpha}{2}|x - y|^2 \leq f(y) - f(x) - \langle\nabla f(x), y - x\rangle 
 
 ## Hamiltonian Mechanics in Optimization
 ### Basic Principles
-Hamiltonians in physics describe systems that conserve total energy, leading to stable trajectories. We adapt this principle for optimization:
+Hamiltonians in physics describe systems that conserve total energy, potentially leading to more
+stable optimization trajectories. In quantum mechanics, Hamiltonians govern the evolution of
+wavefunctions, exploring all possible states. Similarly, in optimization, this could lead to better
+exploration of the parameter space. 
 
-![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Presentation Hamiltonian.png)
+![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Basic.png)
 
-State Space Variables:
+For example, in a frictionless pendulum the total energy, it is the sum of potential and kinetic energy is conserved trough its movement.
+
+We adapt this principle for optimization:
+
+**State Space Variables**
 
 Position ($q$): Represents model parameters
 Momentum ($p$): Represents parameter update velocities
 Time ($t$): Represents optimization steps
 
 
-Hamiltonian Function:
+**Hamiltonian Function**
 $H(q, p) = T(p) + V(q)$, where:
 
 $T(p)$: Kinetic energy (parameter update costs)
 $V(q)$: Potential energy (loss function)
 
 
-Hamilton's Equations:
+**Hamilton's Equations**
 
 $$\begin{align*}
 \dot{q} &= \frac{\partial H}{\partial p} \
@@ -60,7 +67,7 @@ Symplectic geometry provides the mathematical framework for understanding Hamilt
 
 $$\omega = \sum_i dq_i \wedge dp_i$$
 
-![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Presentation Hamiltonian7-07.png)
+![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Symplectic.png)
 
 A frictionless pendulum is one of the most basic forms of a symplectic space. Velocity and angle are the two components that describe the movements of a pendulum. We can map this in a 2D space as a trajectory.
 
@@ -76,7 +83,7 @@ where $\Delta t$ is analogous to the learning rate in optimization.
 ## Hamiltonian Optimization Algorithm
 Our implementation translates these physical principles into optimization:
 
-![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/Presentation Hamiltonian5-05.png)
+![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/HamiltonianSystems.png)
 
 **Momentum Update:**
 
@@ -96,6 +103,7 @@ V &= \frac{1}{2}g^2 \text{ (Potential)} \
 H &= K + V \text{ (Total)}
 \end{align*}$$
 
+
 **Parameter Update:**
 
 $$\theta_t = \theta_{t-1} - \frac{\eta \times m_t}{\sqrt{H_t + \epsilon}}$$
@@ -106,6 +114,7 @@ $\eta$: learning rate
 
 $\epsilon$: small constant for numerical stability
 
+![Alt Text](https://raw.githubusercontent.com/Javihaus/hamiltonian_ai/main/docs/images/HamiltoniainOptimization.png)
 
 ## Hamiltonian Loss Function
 Our custom loss function combines traditional loss with a Hamiltonian-inspired regularization term:
