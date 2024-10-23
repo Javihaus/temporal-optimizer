@@ -111,7 +111,3 @@ jobs:
       with:
         password: ${{ secrets.PYPI_PASSWORD }}
         verbose: true
-            uses: c-hive/gha-remove-artifacts@v1
-            with:
-              age: '24 hours'
-        skip-recent: 5
