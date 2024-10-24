@@ -4,11 +4,12 @@ on:
   push:
     branches: [ main ]
     tags:
-      - 'v*'  # Add tag trigger
+      - 'v*'
   pull_request:
     branches: [ main ]
   release:
     types: [ published ]
+  workflow_dispatch:  # Enable manual triggering
 
 jobs:
   lint-and-format:
@@ -75,7 +76,9 @@ jobs:
   publish:
     needs: [lint-and-format]
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' && github.event.action == 'published'  # Changed condition
+    if: |
+      github.event_name == 'release' && github.event.action == 'published' ||
+      github.event_name == 'workflow_dispatch'
     permissions:
       id-token: write
       contents: read
@@ -95,6 +98,15 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: '3.8'
+    
+    - name: Clean environment
+      run: |
+        rm -rf dist/
+        rm -rf build/
+        rm -rf *.egg-info/
+        find . -type d -name "*.egg-info" -exec rm -rf {} +
+        find . -type d -name "__pycache__" -exec rm -rf {} +
+        find . -type f -name "*.pyc" -delete
     
     - name: Install dependencies
       run: |
