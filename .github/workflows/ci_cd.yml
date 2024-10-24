@@ -1,7 +1,10 @@
 name: CI/CD
+
 on:
   push:
     branches: [ main ]
+    tags:
+      - 'v*'  # Add tag trigger
   pull_request:
     branches: [ main ]
   release:
@@ -70,37 +73,44 @@ jobs:
         fi
 
   publish:
-      needs: [lint-and-format]
-      runs-on: ubuntu-latest
-      # Modify this condition to check for release event
-      if: startsWith(github.ref, 'refs/tags/v')
-      permissions:
-        id-token: write
-        contents: read
-      steps:
-      - name: Debug event info
-        run: |
-          echo "Event name: ${{ github.event_name }}"
-          echo "Ref: ${{ github.ref }}"
-          echo "Is release? ${{ github.event_name == 'release' }}"
-      
-      - uses: actions/checkout@v2
-      
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
-      
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install build twine
-      
-      - name: Build package
-        run: python -m build
-      
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@v1.8.11
-        with:
-          password: ${{ secrets.PYPI_PASSWORD }}
-          verbose: true
+    needs: [lint-and-format]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'published'  # Changed condition
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: Debug event info
+      env:
+        EVENT_CONTEXT: ${{ toJSON(github.event) }}
+      run: |
+        echo "Event name: ${{ github.event_name }}"
+        echo "Ref: ${{ github.ref }}"
+        echo "Action: ${{ github.event.action }}"
+        echo "Event context: $EVENT_CONTEXT"
+    
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine
+    
+    - name: Build package
+      run: python -m build
+    
+    - name: List built packages
+      run: |
+        echo "Built packages:"
+        ls -l dist/
+    
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@v1.8.11
+      with:
+        password: ${{ secrets.PYPI_PASSWORD }}
+        verbose: true
