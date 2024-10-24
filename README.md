@@ -42,7 +42,10 @@ Time ($t$): Represents optimization steps
 
 
 **Hamiltonian Function**
-$H(q, p) = T(p) + V(q)$, where:
+
+$$\begin{align*}H(q, p) = T(p) + V(q)\end{align*}$$
+
+where:
 
 $T(p)$: Kinetic energy (parameter update costs)
 
@@ -460,6 +463,42 @@ pip install -e .[dev]
 pytest
 ```
 
+## References
+
+- Amari, S. (2016). Information geometry and its applications (Vol. 194). Springer.
+- Bergstra, J., Yamins, D., & Cox, D. (2013). Making a science of model search: Hyperparameter optimization
+in hundreds of dimensions for vision architectures. International Conference on Machine Learning, 115–123.
+- Betancourt, M. (2017). A conceptual introduction to Hamiltonian Monte Carlo. ArXiv Preprint
+ArXiv:1701.02434.
+- Boyd, S. and Vandenberghe, L. (2004). Convex Optimization. Cambridge University Press.
+- Chin, S. A., & Kidwell, D. W. (2000). Higher-order force gradient symplectic algorithms. Physical Review E,
+62(6), 8746.
+- De León, M., & Rodrigues, P. R. (2011). Generalized Classical Mechanics and Field Theory: a geometrical
+approach of Lagrangian and Hamiltonian formalisms involving higher order derivatives. Elsevier.
+- Demmel, J.W. (1997). Applied Numerical Linear Algebra. SIAM.
+- Easton, R. W. (1993). Introduction to Hamiltonian dynamical systems and the N-body problem (KR Meyer
+and GR Hall). SIAM Review, 35(4), 659.
+- Friston, K. (2010). The free-energy principle: a unified brain theory? Nature Reviews Neuroscience, 11(2),
+127–138.
+- Goldman, W. M. (1984). The symplectic nature of fundamental groups of surfaces. Advances in
+Mathematics, 54(2), 200–225.
+- Goldstein, P., & Poole, C. (2002). Classical Mechanics. Addison Wesley.
+- Hairer, E., Lubich, C. and Wanner, G. (2006). Geometric Numerical Integration: Structure-Preserving
+Algorithms for Ordinary Differential Equations. Springer.
+- Jain, P. and Kar, P. (2017). Non-convex Optimization for Machine Learning. Foundations and Trends® in
+Machine Learning, 10(3-4), pp.142-336.
+- Kounios, J., & Beeman, M. (2014a). The cognitive neuroscience of insight. Annual Review of Psychology,
+65(1), 71–93.
+- Li, X., Ling, S., Strohmer, T. and Wei, K. (2019). Rapid, Robust, and Reliable Blind Deconvolution via
+Nonconvex Optimization. Applied and Computational Harmonic Analysis, 47(3), pp.893-934.
+- Marsden, J. E., & Ratiu, T. S. (2013). Introduction to mechanics and symmetry: a basic exposition of
+classical mechanical systems (Vol. 17). Springer Science & Business Media.
+- Negahban, S., Yu, B., Wainwright, M.J. and Ravikumar, P.K. (2009). A Unified Framework for High-
+Dimensional Analysis of M-Estimators with Decomposable Regularizers. In Advances in Neural
+Information Processing Systems (pp. 1348-1356).
+- Prugovečki, E. (1979). Stochastic phase spaces and master Liouville spaces in statistical mechanics.
+Foundations of Physics, 9(7–8), 575–587.
+
 ## Citation
 
 If you use Hamiltonian AI in your research, please cite our paper:
@@ -481,6 +520,7 @@ If you use Hamiltonian AI in your research, please cite our paper:
   year={2024}
 }
 ```
+
 
 ## Contact
 For any questions or feedback, please open an issue on our GitHub repository or contact us at javier@jmarin.info
