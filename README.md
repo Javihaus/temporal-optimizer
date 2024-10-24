@@ -45,6 +45,7 @@ Time ($t$): Represents optimization steps
 $H(q, p) = T(p) + V(q)$, where:
 
 $T(p)$: Kinetic energy (parameter update costs)
+
 $V(q)$: Potential energy (loss function)
 
 
@@ -97,11 +98,11 @@ $g_t$: current gradient
 
 **Hamiltonian Energy:**
 
-$$\begin{align*}
-K &= \frac{1}{2}v^2 \text{ (Kinetic)} \
-V &= \frac{1}{2}g^2 \text{ (Potential)} \
-H &= K + V \text{ (Total)}
-\end{align*}$$
+$$\begin{align*}K&= \frac{1}{2}v^2 \text{ (Kinetic)}\end{align*}$$
+
+$$\begin{align*}V&= \frac{1}{2}g^2 \text{ (Potential)}\end{align*}$$
+
+$$\begin{align*}H&= K + V \text{ (Hamiltonian)}\end{align*}$$
 
 
 **Parameter Update:**
@@ -422,7 +423,6 @@ For theoretical foundations and empirical results:
 - [Hamiltonian Neural Networks for Robust Out-of-Time Credit Scoring](https://arxiv.org/abs/2410.10182)
 - [Optimizing AI Reasoning: A Hamiltonian Dynamics Approach to Multi-Hop Question Answering](https://arxiv.org/abs/2410.04415)
 
-[Rest of the original README content including Examples, Contributing, etc.]
 
 ## Examples
 For more detailed examples, please check the examples/ directory in our repository:
