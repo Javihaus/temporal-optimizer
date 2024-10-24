@@ -73,12 +73,17 @@ jobs:
           git push origin HEAD:main
         fi
 
-  publish:
-    needs: [lint-and-format]
+  check-publish:
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'release' && github.event.action == 'published' ||
-      github.event_name == 'workflow_dispatch'
+    outputs:
+      should-publish: ${{ github.event_name == 'release' || github.event_name == 'workflow_dispatch' }}
+    steps:
+      - run: echo "Checking if should publish"
+
+  publish:
+    needs: [lint-and-format, check-publish]
+    runs-on: ubuntu-latest
+    if: needs.check-publish.outputs.should-publish == 'true'
     permissions:
       id-token: write
       contents: read
