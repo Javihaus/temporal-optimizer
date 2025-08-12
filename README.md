@@ -3,8 +3,9 @@
 Drop-in replacements for PyTorch optimizers with enhanced temporal stability and convergence properties.
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-1.10+-orange.svg)](https://pytorch.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-1.13+-orange.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Experimental Results](https://img.shields.io/badge/Results-Validated-green.svg)](#performance-comparison)
 
 ## Why Temporal Optimizer?
 
