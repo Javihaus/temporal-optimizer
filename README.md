@@ -34,13 +34,13 @@ optimizer = StableAdam(model.parameters(), lr=0.001)
 
 That's it. Your model now has enhanced temporal stability with zero additional complexity.
 
-## Key Benefits
+## Main advantages:
 
-- ✅ **Drop-in compatibility**: Works with any PyTorch model  
-- ✅ **Validated improvements**: 42% better parameter precision in experiments
-- ✅ **Enhanced stability**: 2.4x more consistent convergence behavior
-- ✅ **Production ready**: Better long-term performance stability
-- ✅ **Zero learning curve**: Same API as PyTorch optimizers
+- Drop-in compatibility**: Works with any PyTorch model  
+- Validated improvements**: 42% better parameter precision in experiments
+- Enhanced stability**: 2.4x more consistent convergence behavior
+- Production ready**: Better long-term performance stability
+- Zero learning curve**: Same API as PyTorch optimizers
 
 ## Installation
 
@@ -50,7 +50,7 @@ pip install temporal-optimizer
 
 ## Quick Start
 
-### Basic Usage
+### Basic start-up
 
 ```python
 import torch
@@ -108,22 +108,19 @@ optimizer = StableAdam(
 
 *Results from controlled experiments on non-convex optimization landscapes*
 
-**Key Findings:**
-- ✅ **Parameter accuracy**: 42% improvement in reaching optimal values
-- ✅ **Temporal stability**: 2.4x more consistent convergence behavior  
-- ✅ **Noise robustness**: Better performance under gradient noise
-- ✅ **Production ready**: Comparable speed with enhanced stability
+**Results:**
+- Parameter accuracy**: 42% improvement in reaching optimal values
+- Temporal stability**: 2.4x more consistent convergence behavior  
+- Noise robustness**: Better performance under gradient noise
+- Production ready**: Comparable speed with enhanced stability
 
 ## When to Use Temporal Optimizer
 
-**Perfect for:**
 - Credit scoring and financial models
 - Medical diagnosis systems  
 - Recommendation systems
 - Time-series forecasting
 - Any model deployed in production
-
-**Especially valuable when:**
 - Data distribution changes over time
 - Model needs to maintain performance for months/years
 - Training loss exhibits oscillations
@@ -157,7 +154,7 @@ python examples/pytorch_integration.py
 
 ## Novel Research Contributions
 
-### 🔬 SGD + Hamiltonian Momentum Conservation Study
+###  Stochastic Gradient Descent  + Hamiltonian Momentum Conservation Study
 
 ![Hamiltonian Neural Networks Concept](images/hamiltonian_space_concept.png)
 
