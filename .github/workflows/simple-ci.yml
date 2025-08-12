@@ -1,0 +1,52 @@
+name: Simple CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10']
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install torch --index-url https://download.pytorch.org/whl/cpu
+        pip install pytest
+
+    - name: Test basic imports
+      run: |
+        python -c "
+        try:
+            from temporal_optimizer import StableAdam, StableSGD
+            print('✓ Imports successful')
+        except Exception as e:
+            print('✗ Import failed:', str(e))
+            exit(1)
+        "
+
+    - name: Run basic functionality test
+      run: |
+        python tests/test_basic_import.py
+
+    - name: Test package installation
+      run: |
+        pip install -e .
+        python -c "
+        import temporal_optimizer
+        print('✓ Package installed successfully')
+        print('Version:', getattr(temporal_optimizer, '__version__', 'unknown'))
+        "

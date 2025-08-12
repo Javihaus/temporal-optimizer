@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 StableAdam - Drop-in replacement for torch.optim.Adam with temporal stability.
 

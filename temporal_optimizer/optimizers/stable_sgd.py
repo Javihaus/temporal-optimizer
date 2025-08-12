@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 StableSGD - Drop-in replacement for torch.optim.SGD with temporal stability.
 

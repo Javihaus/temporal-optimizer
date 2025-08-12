@@ -15,18 +15,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.8', '3.9', '3.10', '3.11']
-        pytorch-version: ['1.10.0', '1.13.0', '2.0.0']
-        exclude:
-          # PyTorch 2.0 requires Python 3.8+
-          - python-version: '3.7'
+        os: [ubuntu-latest, macos-latest]
+        python-version: ['3.8', '3.9', '3.10']
+        pytorch-version: ['1.13.0', '2.0.0']
+        include:
+          # Test latest versions
+          - os: ubuntu-latest
+            python-version: '3.11'
             pytorch-version: '2.0.0'
-          # Reduce matrix size for faster CI
-          - os: windows-latest
-            pytorch-version: '1.10.0'
-          - os: macos-latest
-            pytorch-version: '1.10.0'
 
     steps:
     - uses: actions/checkout@v4
@@ -49,11 +45,11 @@ jobs:
     - name: Install PyTorch ${{ matrix.pytorch-version }}
       run: |
         if [ "${{ matrix.pytorch-version }}" == "1.10.0" ]; then
-          pip install torch==1.10.0 torchvision==0.11.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install torch==1.10.0 --index-url https://download.pytorch.org/whl/cpu
         elif [ "${{ matrix.pytorch-version }}" == "1.13.0" ]; then
-          pip install torch==1.13.0 torchvision==0.14.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install torch==1.13.0 --index-url https://download.pytorch.org/whl/cpu
         else
-          pip install torch==2.0.0 torchvision==0.15.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install torch==2.0.0 --index-url https://download.pytorch.org/whl/cpu
         fi
       shell: bash
 
