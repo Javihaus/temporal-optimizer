@@ -2,14 +2,14 @@
 
 ## Abstract
 
-This work presents the first systematic investigation of applying Hamiltonian mechanics principles to Stochastic Gradient Descent (SGD) optimization for neural network training. Unlike existing Hamiltonian Monte Carlo approaches used for Bayesian sampling, our method applies momentum conservation, symplectic integration, and energy conservation directly to deterministic optimization for large language model training scenarios.
+This work presents a foundational investigation into applying Hamiltonian mechanics principles to Stochastic Gradient Descent (SGD) optimization for neural network training. Unlike existing Hamiltonian Monte Carlo approaches used for Bayesian sampling, our method applies momentum conservation, symplectic integration, and energy conservation directly to deterministic optimization for large language model training scenarios.
 
 We introduce **StableSGD**, a novel optimizer that enhances standard SGD with:
 1. **Symplectic Integration**: Preserves phase space structure for stable momentum updates
 2. **Energy Conservation**: Adaptive learning rates based on kinetic and potential energy
 3. **Temporal Stability**: Parameter history regularization to prevent excessive oscillations
 
-Our comprehensive experimental evaluation on LLM-style language modeling tasks and challenging optimization landscapes reveals important insights about when and how temporal stability benefits emerge. While our current implementation shows mixed results compared to standard SGD, we identify critical parameter sensitivity issues and provide clear directions for future adaptive approaches.
+Our comprehensive experimental evaluation on LLM-style language modeling tasks and challenging optimization landscapes provides important insights about the implementation challenges and requirements for temporal stability in optimization. While our current implementation shows mixed results compared to standard SGD, we identify critical parameter sensitivity issues and provide clear directions for future adaptive approaches.
 
 ## Keywords
 Stochastic Gradient Descent, Hamiltonian Mechanics, Neural Network Optimization, Momentum Conservation, Temporal Stability, Large Language Models
@@ -20,11 +20,11 @@ Neural network optimization faces persistent challenges in training stability, p
 
 Hamiltonian mechanics, a fundamental framework in physics for studying dynamical systems, offers principled approaches to momentum conservation and energy preservation. While Hamiltonian Monte Carlo methods have been successfully applied to Bayesian sampling, **no prior work has systematically investigated applying Hamiltonian principles directly to deterministic SGD optimization for neural networks**.
 
-This research fills that gap by:
+This research contributes to filling that gap by:
 - Implementing the first SGD variant with true Hamiltonian momentum conservation
 - Providing rigorous experimental evaluation on realistic neural network tasks
-- Identifying parameter sensitivity and computational trade-offs
-- Establishing directions for future adaptive optimization methods
+- Identifying implementation challenges, parameter sensitivity, and computational trade-offs
+- Establishing foundations and directions for future adaptive optimization methods
 
 ## 2. Methodology
 
@@ -142,14 +142,21 @@ else:
 
 ## 6. Conclusions
 
-This work successfully demonstrates the **first implementation of SGD with Hamiltonian momentum conservation** for neural network optimization. While our current approach shows mixed results compared to standard SGD, we have:
+This work presents the **first systematic implementation of SGD with Hamiltonian momentum conservation** for neural network optimization. Our findings provide important foundational insights:
 
-- **Established a novel research direction** combining physics-informed optimization with modern deep learning
-- **Identified critical parameter sensitivities** that guide future development
-- **Provided a rigorous experimental framework** for testing stability-enhanced optimizers
-- **Demonstrated technical feasibility** with manageable computational overhead
+**Technical Contributions:**
+- **Successfully implemented** Hamiltonian mechanics principles in SGD optimization
+- **Established experimental methodology** for evaluating physics-informed optimizers
+- **Quantified computational trade-offs** and parameter sensitivities
+- **Identified specific implementation challenges** that guide future development
 
-The honest reporting of negative results contributes valuable knowledge to the optimization community and establishes clear directions for adaptive approaches that could unlock the benefits of Hamiltonian mechanics in neural network training.
+**Scientific Value:**
+- **Foundational research** that establishes baselines for future work in physics-informed optimization
+- **Transparent analysis** of both technical achievements and performance limitations
+- **Clear directions** for adaptive approaches that could unlock the benefits of Hamiltonian mechanics
+- **Reproducible framework** for community validation and improvement
+
+While our current approach shows mixed performance results compared to standard SGD, this work contributes valuable knowledge to the optimization community through rigorous experimentation and honest reporting of findings, establishing a foundation for future adaptive optimization methods.
 
 ## 7. Reproducibility
 
@@ -172,4 +179,4 @@ Key files:
 
 ---
 
-*This research represents a novel contribution to the intersection of physics-informed optimization and modern neural network training, establishing foundations for future developments in stability-enhanced optimization methods.*
+*This foundational research contributes to the intersection of physics-informed optimization and modern neural network training, providing important technical insights and establishing methodological frameworks for future developments in stability-enhanced optimization methods.*

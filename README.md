@@ -159,13 +159,17 @@ python examples/pytorch_integration.py
 
 ### 🔬 SGD + Hamiltonian Momentum Conservation Study
 
-This repository includes **groundbreaking research** on applying Hamiltonian mechanics principles to SGD optimization for neural network training - the first systematic study of its kind.
+This repository includes **exploratory research** on applying Hamiltonian mechanics principles to SGD optimization for neural network training - the first systematic investigation of its kind.
 
-#### Key Research Achievements:
-- **First Implementation**: Applied symplectic integration to standard SGD (not MCMC)
+#### Research Status: Foundational Investigation
+
+While our current approach shows mixed results compared to standard SGD, this work establishes important foundations and provides critical insights for future adaptive optimization methods.
+
+#### Key Technical Achievements:
+- **First Implementation**: Successfully applied symplectic integration to standard SGD (not MCMC)
 - **Energy Conservation**: Implemented adaptive learning rates based on kinetic/potential energy
-- **Temporal Stability**: Parameter history regularization for stable training
-- **Comprehensive Analysis**: Rigorous comparison with standard SGD on realistic tasks
+- **Temporal Stability**: Parameter history regularization mechanism
+- **Rigorous Analysis**: Comprehensive comparison with detailed performance analysis
 
 #### Novel Experiments:
 ```bash
@@ -179,16 +183,18 @@ python benchmarks/challenging_sgd_stability_test.py
 python benchmarks/research_analysis_summary.py
 ```
 
-#### Research Findings:
-- **Technical Achievement**: Successfully implemented Hamiltonian mechanics in SGD
-- **Parameter Sensitivity**: Identified critical tuning requirements for temporal stability
-- **Computational Trade-offs**: 6-25% overhead depending on problem complexity
-- **Future Directions**: Clear pathways for adaptive and hybrid optimization approaches
+#### Research Findings and Insights:
+- **Implementation Success**: Correctly implemented Hamiltonian mechanics principles in SGD
+- **Performance Analysis**: Standard SGD outperformed in current configurations with identified reasons
+- **Parameter Sensitivity**: Critical tuning requirements discovered for temporal stability parameters
+- **Computational Analysis**: 6-25% overhead quantified across different problem complexities
+- **Future Pathways**: Clear directions identified for adaptive and hybrid optimization approaches
 
-#### Scientific Impact:
-- **Novel Contribution**: No existing similar work combining SGD with Hamiltonian momentum conservation
-- **Reproducible Research**: All experiments include detailed analysis and honest negative results
-- **Open Science**: Complete codebase available for community validation and extension
+#### Scientific Value:
+- **Novel Technical Contribution**: First systematic implementation of SGD with Hamiltonian momentum conservation
+- **Foundational Work**: Establishes baseline and methodology for future research in this direction
+- **Honest Scientific Reporting**: Transparent analysis of both successes and limitations
+- **Community Resource**: Complete reproducible codebase for validation and improvement
 
 See [`benchmarks/README.md`](benchmarks/README.md) for detailed experimental methodology and [`benchmarks/research_analysis_summary.py`](benchmarks/research_analysis_summary.py) for comprehensive findings.
 
@@ -213,10 +219,10 @@ If you use Temporal Optimizer in research, please cite:
 }
 
 @article{sgd_hamiltonian_momentum_conservation,
-  title={SGD with Hamiltonian Momentum Conservation: A Novel Approach to Neural Network Optimization},
+  title={SGD with Hamiltonian Momentum Conservation: Foundational Investigation and Analysis},
   author={Javier Marin},
   year={2025},
-  note={First systematic study of Hamiltonian mechanics applied to SGD for LLM training},
+  note={First systematic implementation and analysis of Hamiltonian mechanics applied to SGD optimization},
   url={https://github.com/Javihaus/temporal-optimizer}
 }
 ```
