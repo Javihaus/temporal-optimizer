@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javier Marin - AI Research & Strategy Consulting</title>
+    <meta name="description" content="Transform your organization with cutting-edge AI research. Harvard-trained strategy meets peer-reviewed implementation.">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --background: #ffffff;
+            --border: #e5e7eb;
+            --accent: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--background);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .name {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .credentials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .credential {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .cta-primary {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-right: 16px;
+        }
+
+        .cta-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .cta-secondary {
+            display: inline-block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 12px 0;
+            font-weight: 500;
+        }
+
+        .cta-secondary:hover {
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 40px 0;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .service-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .service-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .service-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+            background: #eff6ff;
+            padding: 4px 12px;
+            border-radius: 16px;
+        }
+
+        .service-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            padding: 4px 0;
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .service-features li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* Expertise */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+
+        .expertise-category h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .expertise-list {
+            list-style: none;
+        }
+
+        .expertise-list li {
+            padding: 4px 0;
+            color: var(--text-secondary);
+            font-size: 15px;
+            border-left: 2px solid var(--border);
+            padding-left: 12px;
+            margin: 8px 0;
+        }
+
+        /* Results */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .result-item {
+            text-align: center;
+            padding: 24px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .result-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .result-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Publications */
+        .publication {
+            border-left: 3px solid var(--primary-color);
+            padding-left: 20px;
+            margin-bottom: 24px;
+        }
+
+        .pub-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .pub-venue {
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .pub-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Contact */
+        .contact {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 16px;
+        }
+
+        .contact p {
+            margin-bottom: 32px;
+            color: var(--text-secondary);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .contact-link:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .header {
+                padding: 60px 0 40px;
+            }
+
+            .name {
+                font-size: 28px;
+            }
+
+            .tagline {
+                font-size: 16px;
+            }
+
+            .credentials {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="avatar">JM</div>
+            <h1 class="name">Javier Marin</h1>
+            <p class="tagline">
+                Transform your organization with cutting-edge AI research.<br>
+                Harvard-trained strategy meets peer-reviewed implementation.
+            </p>
+            
+            <div class="credentials">
+                <span class="credential">🎓 Harvard Business School</span>
+                <span class="credential">🏛️ MIT Professional Education</span>
+                <span class="credential">📄 IEEE DSAA 2025</span>
+                <span class="credential">🔬 29+ Research Repos</span>
+            </div>
+            
+            <a href="#contact" class="cta-primary">Schedule Strategy Call</a>
+            <a href="#services" class="cta-secondary">View Services →</a>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Value Proposition -->
+            <section class="section">
+                <h2 class="section-title">Research-Backed AI Transformation</h2>
+                <p class="section-description">
+                    I help fast-growing companies implement tomorrow's AI techniques today. Unlike traditional consultants who deploy existing solutions, I bring cutting-edge research from leading institutions directly to your competitive advantage.
+                </p>
+                
+                <div class="results-grid">
+                    <div class="result-item">
+                        <div class="result-number">42%</div>
+                        <div class="result-label">Better Parameter Precision</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-number">2.4x</div>
+                        <div class="result-label">More Stable Convergence</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-number">$2M+</div>
+                        <div class="result-label">Client Value Created</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services -->
+            <section class="section" id="services">
+                <h2 class="section-title">How I Help</h2>
+                <p class="section-description">
+                    Three ways to leverage advanced AI research for competitive advantage.
+                </p>
+
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-header">
+                            <h3 class="service-title">Strategic AI Advisory</h3>
+                            <span class="service-price">$35k/month</span>
+                        </div>
+                        <p class="service-description">
+                            For Fortune 500 companies and major enterprises ready to transform their AI strategy with research-backed approaches.
+                        </p>
+                        <ul class="service-features">
+                            <li>Quarterly AI strategy assessment</li>
+                            <li>Advanced technology roadmapping</li>
+                            <li>Research integration consulting</li>
+                            <li>Executive team AI education</li>
+                            <li>Custom framework development</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-header">
+                            <h3 class="service-title">Technical Implementation</h3>
+                            <span class="service-price">$25k/month</span>
+                        </div>
+                        <p class="service-description">
+                            For funded startups and mid-market companies ready to implement advanced AI architectures and optimization techniques.
+                        </p>
+                        <ul class="service-features">
+                            <li>Advanced AI architecture design</li>
+                            <li>Hamiltonian Neural Networks implementation</li>
+                            <li>Custom optimization solutions</li>
+                            <li>Team technical training</li>
+                            <li>Performance optimization</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-header">
+                            <h3 class="service-title">Research Collaboration</h3>
+                            <span class="service-price">$200/hour</span>
+                        </div>
+                        <p class="service-description">
+                            For specific technical challenges, research validation, or companies exploring cutting-edge AI techniques.
+                        </p>
+                        <ul class="service-features">
+                            <li>Technical audits and assessments</li>
+                            <li>Proof-of-concept development</li>
+                            <li>Research methodology transfer</li>
+                            <li>Academic-industry bridge consulting</li>
+                            <li>Innovation workshops</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p style="text-align: center; color: var(--text-secondary); font-size: 15px; margin-top: 24px;">
+                    <strong>Minimum engagement:</strong> $50,000 • <strong>Typical project:</strong> 3-6 months
+                </p>
+            </section>
+
+            <!-- Expertise -->
+            <section class="section">
+                <h2 class="section-title">Technical Expertise</h2>
+                <p class="section-description">
+                    Advanced AI techniques proven in peer-reviewed research and enterprise implementations.
+                </p>
+
+                <div class="expertise-grid">
+                    <div>
+                        <h3>Advanced AI Research</h3>
+                        <ul class="expertise-list">
+                            <li>Hamiltonian Neural Networks</li>
+                            <li>Temporal Optimization Algorithms</li>
+                            <li>Quantum Machine Learning</li>
+                            <li>Explainable AI Systems</li>
+                            <li>Digital Twin Development</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3>Enterprise Implementation</h3>
+                        <ul class="expertise-list">
+                            <li>Large Language Model Integration</li>
+                            <li>Computer Vision Systems</li>
+                            <li>Advanced Time Series Analysis</li>
+                            <li>Recommendation Systems</li>
+                            <li>Reinforcement Learning</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Publications -->
+            <section class="section">
+                <h2 class="section-title">Recent Research</h2>
+                <p class="section-description">
+                    Peer-reviewed publications demonstrating cutting-edge AI research applied to real-world challenges.
+                </p>
+
+                <div class="publication">
+                    <h3 class="pub-title">Hamiltonian Neural Networks for Robust Out-of-Time Credit Scoring</h3>
+                    <div class="pub-venue">IEEE DSAA 2025 Conference</div>
+                    <p class="pub-description">
+                        Empirical validation of Hamiltonian mechanics applied to financial modeling, demonstrating superior robustness and temporal stability in production credit scoring systems.
+                    </p>
+                </div>
+
+                <div class="publication">
+                    <h3 class="pub-title">SGD with Hamiltonian Momentum Conservation</h3>
+                    <div class="pub-venue">Open Research • GitHub</div>
+                    <p class="pub-description">
+                        First systematic implementation of Hamiltonian mechanics in SGD optimization, achieving 42% better parameter precision and 2.4x stability improvement over standard methods.
+                    </p>
+                </div>
+
+                <div class="publication">
+                    <h3 class="pub-title">Adjacent Possible Enterprise AI Framework</h3>
+                    <div class="pub-venue">Industry Methodology</div>
+                    <p class="pub-description">
+                        Proprietary strategic framework for identifying and implementing AI opportunities in enterprise environments, focusing on measurable value creation and competitive advantage.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Contact -->
+            <section class="section" id="contact">
+                <div class="contact">
+                    <h2>Ready to Transform Your AI Strategy?</h2>
+                    <p>
+                        Let's discuss how cutting-edge research can drive your competitive advantage.<br>
+                        Trusted by Fortune 500 companies and funded startups worldwide.
+                    </p>
+                    
+                    <div class="contact-links">
+                        <a href="mailto:javier@javiermarinvalenzuela.com" class="contact-link">
+                            📧 Email Consultation
+                        </a>
+                        <a href="https://calendly.com/javier-marin-ai/strategy-call" class="contact-link">
+                            📅 Schedule Call
+                        </a>
+                        <a href="https://www.linkedin.com/in/javiermarinvalenzuela/" class="contact-link">
+                            💼 LinkedIn
+                        </a>
+                        <a href="https://github.com/Javihaus" class="contact-link">
+                            🔬 Research
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2024 Javier Marin. Advanced AI research meets enterprise strategy.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Simple analytics tracking
+        function trackClick(element, action) {
+            // Add your analytics tracking here
+            console.log('Tracking:', action);
+        }
+
+        // Add click tracking to CTA buttons
+        document.querySelectorAll('.cta-primary, .cta-secondary').forEach(button => {
+            button.addEventListener('click', () => trackClick(button, 'CTA Click'));
+        });
+    </script>
+</body>
+</html>
