@@ -1,17 +1,18 @@
-name: Release
+# Release workflow disabled - manual release process
+name: Release (Disabled)
 
 on:
-  push:
-    tags:
-      - 'v*'
-  release:
-    types: [published]
-  workflow_dispatch:
+  workflow_dispatch:  # Only run manually with explicit trigger
     inputs:
       version:
         description: 'Version to release (e.g., 0.1.0)'
         required: true
         type: string
+  # push:
+  #   tags:
+  #     - 'v*'
+  # release:
+  #   types: [published]
 
 permissions:
   contents: read

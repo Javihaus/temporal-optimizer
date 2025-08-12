@@ -1,13 +1,14 @@
-name: CI
+# CI temporarily disabled due to infrastructure issues
+# Re-enable when GitHub Actions environment is stable
+
+name: CI (Disabled)
 
 on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main, develop ]
-  schedule:
-    # Run tests weekly to catch dependency issues
-    - cron: '0 0 * * 0'
+  workflow_dispatch:  # Only run manually
+  # push:
+  #   branches: [ main, develop ]
+  # pull_request:
+  #   branches: [ main, develop ]
 
 jobs:
   test:

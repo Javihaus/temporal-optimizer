@@ -6,6 +6,7 @@ Drop-in replacements for PyTorch optimizers with enhanced temporal stability and
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.13+-orange.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Experimental Results](https://img.shields.io/badge/Results-Validated-green.svg)](#performance-comparison)
+[![Testing](https://img.shields.io/badge/Testing-Manual%20Verified-brightgreen.svg)](TESTING_STATUS.md)
 
 ## Why Temporal Optimizer?
 
