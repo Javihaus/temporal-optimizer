@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "temporal-optimizer"
 version = "0.1.0"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"},
+    {name = "Javier Marin", email = "javier@jmarin.info"},
 ]
 description = "Drop-in PyTorch optimizer replacements with enhanced temporal stability"
 readme = "README.md"
@@ -63,11 +63,11 @@ test = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/yourusername/temporal-optimizer"
+"Homepage" = "https://github.com/Javihaus/hamiltonian_ai"
 "Documentation" = "https://temporal-optimizer.readthedocs.io"
-"Repository" = "https://github.com/yourusername/temporal-optimizer"
-"Bug Reports" = "https://github.com/yourusername/temporal-optimizer/issues"
-"Changelog" = "https://github.com/yourusername/temporal-optimizer/blob/main/CHANGELOG.md"
+"Repository" = "https://github.com/Javihaus/hamiltonian_ai"
+"Bug Reports" = "https://github.com/Javihaus/hamiltonian_ai/issues"
+"Changelog" = "https://github.com/Javihaus/hamiltonian_ai/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
 packages = ["temporal_optimizer"]

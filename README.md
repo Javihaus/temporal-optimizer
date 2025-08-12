@@ -158,8 +158,8 @@ If you use Temporal Optimizer in research, please cite:
 ```bibtex
 @software{temporal_optimizer,
   title={Temporal Optimizer: Drop-in PyTorch optimizers with temporal stability},
-  author={Your Name},
+  author={Javier Marin},
   year={2024},
-  url={https://github.com/yourusername/temporal-optimizer}
+  url={https://github.com/Javihaus/hamiltonian_ai}
 }
 ```
