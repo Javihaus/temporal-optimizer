@@ -68,7 +68,7 @@ pip install torch pytest
 python tests/test_basic_import.py
 
 # Run experimental validation
-python final_benchmark.py
+python benchmarks/validated_performance_benchmark.py
 ```
 
 **Note**: The package is production-ready despite disabled automated CI. All functionality has been manually verified and experimentally validated.

@@ -141,7 +141,10 @@ optimizer = StableAdam(
 Run the included examples to see temporal stability in action:
 
 ```bash
-# Reproduce credit scoring results
+# Run validated performance benchmarks
+python benchmarks/validated_performance_benchmark.py
+
+# Reproduce credit scoring results  
 python benchmarks/credit_scoring_reproduction.py
 
 # Compare optimization performance
