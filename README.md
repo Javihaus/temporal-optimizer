@@ -159,6 +159,8 @@ python examples/pytorch_integration.py
 
 ### 🔬 SGD + Hamiltonian Momentum Conservation Study
 
+![Hamiltonian Neural Networks Concept](images/hamiltonian_space_concept.png)
+
 This repository includes **exploratory research** on applying Hamiltonian mechanics principles to SGD optimization for neural network training - the first systematic investigation of its kind.
 
 #### Research Status: Foundational Investigation
