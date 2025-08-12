@@ -99,13 +99,13 @@ def create_complex_dataset(n_samples=2000, n_features=50, n_classes=5, noise_lev
     
     # Create non-linear relationships
     feature_interactions = torch.randn(n_features, n_features) * 0.1
-    X_interaction = X @ feature_interactions
+    X_interaction = torch.mm(X, feature_interactions)
     
     # Complex target generation
     weights = torch.randn(n_features, n_classes)
     interaction_weights = torch.randn(n_features, n_classes) * 0.3
     
-    logits = X @ weights + X_interaction @ interaction_weights
+    logits = torch.mm(X, weights) + torch.mm(X_interaction, interaction_weights)
     
     # Add noise
     logits += torch.randn_like(logits) * noise_level

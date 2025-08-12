@@ -6,7 +6,11 @@ Users should not import from this module directly.
 """
 
 import torch
-from typing import Dict, Any
+try:
+    from typing import Dict, Any
+except ImportError:
+    Dict = dict
+    Any = object
 
 
 class HamiltonianMechanics:
@@ -28,7 +32,7 @@ class HamiltonianMechanics:
         momentum_decay: float,
         epsilon: float = 1e-8,
         energy_conservation: bool = True
-    ) -> tuple[torch.Tensor, torch.Tensor]:
+    ):
         """
         Perform symplectic integration update preserving geometric structure.
         

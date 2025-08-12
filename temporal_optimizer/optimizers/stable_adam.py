@@ -7,7 +7,13 @@ stability through Hamiltonian mechanics-inspired updates.
 
 import torch
 from torch.optim import Optimizer
-from typing import Any, Dict, Optional
+try:
+    from typing import Any, Dict, Optional
+except ImportError:
+    # Fallback for older Python versions
+    Any = object
+    Dict = dict
+    Optional = type(None)
 from .base import HamiltonianMechanics
 
 
@@ -42,28 +48,28 @@ class StableAdam(Optimizer):
     def __init__(
         self,
         params,
-        lr: float = 1e-3,
-        betas: tuple[float, float] = (0.9, 0.999),
-        eps: float = 1e-8,
-        weight_decay: float = 0,
-        temporal_stability: float = 0.01,
-        momentum_decay: float = 0.9,
-        energy_conservation: bool = True
+        lr=1e-3,
+        betas=(0.9, 0.999),
+        eps=1e-8,
+        weight_decay=0,
+        temporal_stability=0.01,
+        momentum_decay=0.9,
+        energy_conservation=True
     ):
         if not 0.0 <= lr:
-            raise ValueError(f"Invalid learning rate: {lr}")
+            raise ValueError("Invalid learning rate: {}".format(lr))
         if not 0.0 <= eps:
-            raise ValueError(f"Invalid epsilon value: {eps}")
+            raise ValueError("Invalid epsilon value: {}".format(eps))
         if not 0.0 <= betas[0] < 1.0:
-            raise ValueError(f"Invalid beta parameter at index 0: {betas[0]}")
+            raise ValueError("Invalid beta parameter at index 0: {}".format(betas[0]))
         if not 0.0 <= betas[1] < 1.0:
-            raise ValueError(f"Invalid beta parameter at index 1: {betas[1]}")
+            raise ValueError("Invalid beta parameter at index 1: {}".format(betas[1]))
         if not 0.0 <= weight_decay:
-            raise ValueError(f"Invalid weight_decay value: {weight_decay}")
+            raise ValueError("Invalid weight_decay value: {}".format(weight_decay))
         if not 0.0 <= temporal_stability:
-            raise ValueError(f"Invalid temporal_stability value: {temporal_stability}")
+            raise ValueError("Invalid temporal_stability value: {}".format(temporal_stability))
         if not 0.0 <= momentum_decay < 1.0:
-            raise ValueError(f"Invalid momentum_decay value: {momentum_decay}")
+            raise ValueError("Invalid momentum_decay value: {}".format(momentum_decay))
         
         defaults = dict(
             lr=lr,
@@ -77,7 +83,7 @@ class StableAdam(Optimizer):
         super(StableAdam, self).__init__(params, defaults)
         
         # Store previous parameters for temporal stability
-        self._previous_params: Dict[str, torch.Tensor] = {}
+        self._previous_params = {}
         self._step_count = 0
     
     def __setstate__(self, state):
@@ -99,7 +105,7 @@ class StableAdam(Optimizer):
                 if p.grad is None:
                     continue
                     
-                param_id = f"{id(group)}_{i}"
+                param_id = "{}_{}".format(id(group), i)
                 current_params[param_id] = p.data.clone()
                 
                 grad = p.grad
@@ -170,6 +176,6 @@ class StableAdam(Optimizer):
         
         return loss
     
-    def get_temporal_stability_penalty(self) -> Optional[torch.Tensor]:
+    def get_temporal_stability_penalty(self):
         """Get the last computed temporal stability penalty."""
         return getattr(self, '_last_stability_penalty', None)

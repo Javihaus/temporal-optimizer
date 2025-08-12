@@ -31,7 +31,7 @@ def create_synthetic_data(n_samples=1000, n_features=20, n_classes=3, noise=0.1)
     
     # Create class-dependent patterns
     true_weights = torch.randn(n_features, n_classes)
-    logits = X @ true_weights + torch.randn(n_samples, n_classes) * noise
+    logits = torch.mm(X, true_weights) + torch.randn(n_samples, n_classes) * noise
     y = torch.argmax(logits, dim=1)
     
     return X, y

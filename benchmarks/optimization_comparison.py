@@ -29,7 +29,7 @@ def create_synthetic_classification_data(n_samples=1000, n_features=20, n_classe
     
     # Create some structure in the data
     true_weights = torch.randn(n_features, n_classes)
-    logits = X @ true_weights + torch.randn(n_samples, n_classes) * 0.1
+    logits = torch.mm(X, true_weights) + torch.randn(n_samples, n_classes) * 0.1
     y = torch.argmax(logits, dim=1)
     
     return X, y
@@ -40,7 +40,7 @@ def create_synthetic_regression_data(n_samples=1000, n_features=10, noise=0.1):
     torch.manual_seed(42)
     X = torch.randn(n_samples, n_features)
     true_weights = torch.randn(n_features, 1)
-    y = X @ true_weights + torch.randn(n_samples, 1) * noise
+    y = torch.mm(X, true_weights) + torch.randn(n_samples, 1) * noise
     
     return X, y.squeeze()
 
